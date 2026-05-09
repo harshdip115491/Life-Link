@@ -1,0 +1,194 @@
+
+# 🚫 HARD CONSTRAINTS (DO NOT BREAK)
+- Use Python
+- Use Streamlit ONLY for UI (NO Tkinter)
+- Use SQLite ONLY (lifelink.db)
+- NO APIs
+- NO sockets
+- NO requests library
+- NO client-server architecture
+- Everything must run locally
+- Code must be modular, clean, and fully working
+- DO NOT skip ANY feature
+- DO NOT simplify logic
+- DO NOT give partial implementation
+# 🎯 SYSTEM GOAL
+Build a REAL-WORLD system with full workflow:
+USER → HOSPITAL → ORGAN BANK → ADMIN
+All modules must be connected through SQLite database
+# 📁 PROJECT STRUCTURE (STRICT)
+Create files exactly like this:
+- app.py (main entry)
+- db.py (database)
+- modules/
+    - user.py
+    - hospital.py
+    - bank.py
+    - admin.py
+- utils/
+    - auth.py
+    - helpers.py
+# 💾 DATABASE (STRICT)
+Use SQLite file: lifelink.db
+Tables (must match exactly):
+1. users
+2. hospitals
+3. requests
+4. donations
+5. bank_requests
+6. inventory
+7. recycle_bin
+Constraints:
+- username UNIQUE
+- aadhaar UNIQUE
+- phone UNIQUE
+# 👤 USER MODULE
+## Registration
+Fields:
+- name, dob (date picker), gender, blood
+- aadhaar (UNIQUE), phone (UNIQUE)
+- email, address (state/district/subdistrict/pincode)
+- username (UNIQUE), password
+Imae:
+- Camera capture (OpenCV)
+- OR upload
+- Preview + retake
+- Save in /user_images/
+Validation:
+- No empty fields
+- No duplicates
+## Login
+- Validate credentials
+- Error if invalid
+## Dashboard
+- Title: "WELCOME TO LIFE + LINK"
+- Profile image (circle)
+- Sidebar menu:
+    - Update Profile
+    - Request Organ
+    - Donate Organ
+    - Logout
+## Update Profile
+- Editable fields
+- Image update
+- Persist changes
+## Organ Request
+- Use stored user data
+- Fields:
+    - Organ
+    - Hospital (20 predefined)
+    - Priority
+    - Note
+- Auto:
+    - ID
+    - DateTime
+- Save to DB
+- Send ONLY to selected hospital
+## Donation
+- Select organ
+- Store in donations table
+# 🏥 HOSPITAL MODULE
+## Login
+- Use predefined hospitals
+## Dashboard
+- Show ONLY requests assigned to that hospital
+## Table UI
+Columns:
+- Request ID
+- Name
+- Organ
+- Status
+## Detail View
+- Full user data
+- Image
+## Actions
+- Approve
+- Reject
+- Pending
+## Features
+- Search (name, ID)
+- Analytics:
+    - Total
+    - Approved
+    - Pending
+    - Rejected
+    - Today
+## Inventory
+- Organs received
+- Sent
+- Transplanted
+## Bank Request
+- Send request to bank
+- Store in bank_requests
+# 🏦 ORGAN BANK MODULE
+## Dashboard
+- View approved hospital requests
+## Features
+- Approve / Reject hospital requests
+- Manage inventory
+## Tracking
+- Organs received
+- Organs sent
+## Search
+- Hospital
+- Request ID
+## Matching
+- Match donors with requests
+## Recycle Bin
+- Soft delete + restore
+# 🛡 ADMIN MODULE
+## Control
+- View all users
+- View all hospitals
+- Approve/reject hospitals
+## Monitoring
+- View all requests
+- Full system tracking
+# 🎨 UI REQUIREMENTS
+- Use Streamlit sidebar navigation
+- Use columns + containers
+- Use st.dataframe for tables
+- Add search bars everywhere
+- Add filters
+- Full-width layout
+- Clean UI (NOT plain)
+# 🔍 TABLE FEATURES
+- All dashboards must include:
+    - Search bar
+    - Table view
+    - Click row → detailed view
+# 📊 TRACKING HISTORY
+- Maintain history for:
+    - Requests
+    - Donations
+    - Transfers
+- Display in tables
+ 🔒 SECURITY
+- Role-based access
+- No cross-module access
+- Session-based login
+# ⚙️ SYSTEM BEHAVIOR
+- No blank inputs
+- No duplicate data
+- Data persists after restart
+- All actions update database immediately
+# 📦 OUTPUT REQUIREMENTS
+- Provide FULL working code
+- No placeholders
+- No pseudo code
+- No explanations only code
+- Code must run directly using:
+    streamlit run app.py
+# 🧠 EXECUTION STRATEGY (IMPORTANT)
+Before writing code:
+1. Design architecture
+2. Define DB usage per module
+3. Then implement step-by-step
+# 🎯 FINAL GOAL
+A real-world NOTTO-like system with:
+- Clean UI
+- Fully working workflow
+- No errors
+- Complete feature coverage
+
+s
