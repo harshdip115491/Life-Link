@@ -6,3 +6,4 @@ Pillow
 reportlab
 qrcode
 streamlit-cropper
+matplotlib
