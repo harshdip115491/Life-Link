@@ -5,7 +5,6 @@ import uuid
 
 
 # ---------------- PLAY SOUND ----------------
-def play_sound(path):
     if not os.path.exists(path):
         return
 
@@ -22,7 +21,6 @@ def play_sound(path):
 
 
 # ---------------- TRIGGER SOUND ----------------
-def trigger_sound(path):
     if "sound_queue" not in st.session_state:
         st.session_state.sound_queue = []
 
@@ -33,11 +31,9 @@ def trigger_sound(path):
 
 
 # ---------------- PROCESS SOUND ----------------
-def process_sounds():
     if "sound_queue" not in st.session_state:
         return
 
     for item in st.session_state.sound_queue:
-        play_sound(item["path"])
 
     st.session_state.sound_queue = []

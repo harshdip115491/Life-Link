@@ -23,7 +23,7 @@ def load_data():
 # ---------------- DASHBOARD ----------------
 def admin_dashboard():
 
-    st.title("📊 LifeLink Analytics Dashboard (NOTTO Style)")
+    st.title("📊 Life+Link Analytics Dashboard ")
 
     users, hospitals, requests, bank, inventory, emergency = load_data()
 
@@ -109,7 +109,7 @@ def admin_dashboard():
         st.pyplot(fig)
 
     # ---------------- RAW DATA (OPTIONAL) ----------------
-    with st.expander("📂 View Raw Data"):
+    with st.expander("🗂️ View Data"):
         st.write("Users", users)
         st.write("Requests", requests)
         st.write("Bank", bank)

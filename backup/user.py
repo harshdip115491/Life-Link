@@ -4,7 +4,6 @@ from india_data import india
 from image_utils import save_image
 from search_utils import search, sort_data
 from utils import notify
-from sound_utils import play_sound
 from pdf_utils import generate_certificate_production
 from streamlit_cropper import st_cropper
 import datetime
@@ -111,7 +110,6 @@ def register():
 
         if not all([name,dob,aadhaar,phone,username,password]):
             st.error("Fill all required fields")
-            play_sound("assets/error.mp3")
             return
 
         c = db.conn.cursor()
@@ -120,7 +118,6 @@ def register():
 
         if c.fetchone():
             st.error("Duplicate data")
-            play_sound("assets/error.mp3")
             return
 
         image_path = ""
@@ -145,7 +142,6 @@ def register():
         db.conn.commit()
 
         st.success("✅ Registration Successful")
-        play_sound("assets/success.mp3")
         notify()
 
         st.session_state.temp_image = None
@@ -172,7 +168,6 @@ def login():
             st.session_state.role = "user"
             st.rerun()
         else:
-            play_sound("assets/loginerror.mp3")
             st.error("Invalid credentials")
 
 
@@ -181,7 +176,6 @@ def login():
 def dashboard():
 
     if st.session_state.get("play_login_sound"):
-        play_sound("assets/login.mp3")
         st.session_state.play_login_sound = False
 
     user = st.session_state.user
@@ -241,7 +235,6 @@ def profile(data):
     # ✅ SHOW SUCCESS AFTER RERUN
     if st.session_state.get("profile_updated"):
         st.success("✅ Profile Updated")
-        play_sound("assets/success.mp3")
         notify()
         st.session_state.profile_updated = False
 
@@ -361,7 +354,6 @@ def request_organ(data):
         db.conn.commit()
 
         st.success("Submitted")
-        play_sound("assets/success.mp3")
         notify()
 
 
@@ -396,7 +388,6 @@ def donate(data):
 
         db.conn.commit()
 
-        play_sound("assets/success.mp3")
         notify()
 
         cert_data = {
@@ -440,7 +431,6 @@ def emergency(data):
         db.conn.commit()
 
         st.success("Emergency Sent")
-        play_sound("assets/success.mp3")
 
 
 # ---------------- ANALYTICS ----------------

@@ -4,7 +4,6 @@ from india_data import india
 from image_utils import save_image
 from search_utils import search, sort_data
 from utils import notify
-from sound_utils import play_sound
 from pdf_utils import generate_certificate_production
 from streamlit_cropper import st_cropper
 import datetime
@@ -111,7 +110,6 @@ def register():
 
         if not all([name,dob,aadhaar,phone,username,password]):
             st.error("Fill all required fields")
-            play_sound("assets/error.mp3")
             return
 
         c = db.conn.cursor()
@@ -120,7 +118,6 @@ def register():
 
         if c.fetchone():
             st.error("Duplicate data")
-            play_sound("assets/error.mp3")
             return
 
         image_path = ""
@@ -145,7 +142,6 @@ def register():
         db.conn.commit()
 
         st.success("✅ Registration Successful")
-        play_sound("assets/success.mp3")
         notify()
 
         st.session_state.temp_image = None
@@ -172,7 +168,6 @@ def login():
             st.session_state.role = "user"
             st.rerun()
         else:
-            play_sound("assets/loginerror.mp3")
             st.error("Invalid credentials")
 
 
@@ -181,7 +176,6 @@ def login():
 def dashboard():
 
     if st.session_state.get("play_login_sound"):
-        play_sound("assets/login.mp3")
         st.session_state.play_login_sound = False
 
     user = st.session_state.user
@@ -216,24 +210,91 @@ def dashboard():
 # ---------------- HOME ----------------
 
 def home(data):
-    st.title("💙 LIFE + LINK")
+
+    st.markdown("""
+    <style>
+    .main-title{
+        font-size:48px;
+        font-weight:800;
+        color:white;
+        margin-bottom:20px;
+    }
+
+    .awareness-card{
+        background: rgba(20,20,30,0.85);
+        border-radius:20px;
+        padding:25px;
+        border-left:8px solid #ff4b6e;
+        box-shadow:0px 0px 15px rgba(255,75,110,0.3);
+    }
+
+    .awareness-title{
+        font-size:32px;
+        font-weight:bold;
+        color:#ffffff;
+        margin-bottom:15px;
+    }
+
+    .awareness-text{
+        font-size:20px;
+        color:#f0f0f0;
+        line-height:2;
+    }
+
+    .highlight{
+        color:#4da6ff;
+        font-weight:bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="main-title">💙 LIFE + LINK</div>',
+        unsafe_allow_html=True
+    )
 
     col1, col2 = st.columns([2,1])
 
     with col1:
+
         st.markdown("""
-        ### 🫀 Organ Donation Awareness
-        - 1 donor saves 8 lives  
-        - 5 lakh+ waiting patients  
-        - <1% donation rate  
-        """)
+        <div class="awareness-card">
+
+        <div class="awareness-title">
+        🫀 Organ Donation Awareness
+        </div>
+
+        <div class="awareness-text">
+
+        ❤️ <span class="highlight">1 Organ Donor Can Save Up To 8 Lives</span><br>
+
+        👨‍⚕️ More Than <span class="highlight">5 Lakh Patients</span>
+        Are Waiting For A Life-Saving Transplant<br>
+
+        📉 India's Organ Donation Rate Is
+        <span class="highlight">Less Than 1%</span><br>
+
+        🌟 Your Organs Can Be Someone's Second Chance<br>
+
+        🤝 Donate Life, Spread Hope<br>
+
+        💝 Leave A Legacy Of Life Through Organ Donation<br>
+
+        🏥 Don't Take Your Organs To Heaven;
+        They Are Needed Here<br>
+
+        🚀 Pledge Today, Save Lives Tomorrow<br>
+
+        ❤️ Organ Donation – The Greatest Gift Of All
+
+        </div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
+
         if data[15] and os.path.exists(data[15]):
-            st.image(data[15], width="stretch")
-
-
-# ---------------- PROFILE ----------------
+            st.image(data[15], use_container_width=True)# ---------------- PROFILE ----------------
 
 def profile(data):
     st.title("👤 Profile")
@@ -241,7 +302,6 @@ def profile(data):
     # ✅ SHOW SUCCESS AFTER RERUN
     if st.session_state.get("profile_updated"):
         st.success("✅ Profile Updated")
-        play_sound("assets/success.mp3")
         notify()
         st.session_state.profile_updated = False
 
@@ -361,7 +421,6 @@ def request_organ(data):
         db.conn.commit()
 
         st.success("Submitted")
-        play_sound("assets/success.mp3")
         notify()
 
 
@@ -396,12 +455,11 @@ def donate(data):
 
         db.conn.commit()
 
-        play_sound("assets/success.mp3")
         notify()
 
         cert_data = {
             "name": data[2],
-            "hospital": "LifeLink Medical System",
+            "hospital": "Life+Link Medical System",
             "cause": "Organ Donation (Voluntary)",
             "date": date
         }
@@ -440,7 +498,6 @@ def emergency(data):
         db.conn.commit()
 
         st.success("Emergency Sent")
-        play_sound("assets/success.mp3")
 
 
 # ---------------- ANALYTICS ----------------

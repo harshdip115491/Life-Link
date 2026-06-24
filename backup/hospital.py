@@ -3,7 +3,6 @@ from db import DB
 from search_utils import search, sort_data
 from pdf_utils import generate_certificate_production
 from ai_match import match_organ
-from sound_utils import play_sound
 import datetime
 import pandas as pd
 
@@ -97,7 +96,6 @@ def request_detail(row, hospital):
 def update_status(req_id, status):
     db.conn.execute("UPDATE requests SET status=? WHERE id=?", (status, req_id))
     db.conn.commit()
-    play_sound("assets/success.mp3")
     st.success(f"Updated to {status}")
 
 
@@ -113,7 +111,6 @@ def death_certificate(user, hospital):
 
         if not confirm:
             st.error("Consent required")
-            play_sound("assets/error.mp3")
             return
 
         now = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
@@ -146,7 +143,6 @@ def death_certificate(user, hospital):
 
         db.conn.commit()
 
-        play_sound("assets/success.mp3")
         st.success("Sent to Bank & Inventory Updated")
         st.info(f"PDF: {pdf_path}")
 
@@ -175,7 +171,6 @@ def search_user():
         if user:
             st.write(user)
         else:
-            play_sound("assets/error.mp3")
             st.error("Not found")
 
 
@@ -198,7 +193,6 @@ def send_request_bank(hospital):
 
         db.conn.commit()
 
-        play_sound("assets/success.mp3")
 
         st.success("Request Sent")
 

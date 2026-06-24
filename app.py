@@ -25,7 +25,7 @@ if "hospital" not in st.session_state:
 
 
 # ---------------- SIDEBAR ----------------
-st.sidebar.title("💙 LifeLink System")
+st.sidebar.title("❤️ Life+Link System")
 
 
 # =========================================================
@@ -47,7 +47,7 @@ if st.session_state.role is None:
 
     # ---------------- HOSPITAL ----------------
     elif role == "Hospital":
-        st.title("🏥 Hospital Login")
+        st.title("🚑 Hospital Login")
 
         hospital_name = st.selectbox("Select Hospital", [
             "AIIMS Delhi","Apollo Hospital","Fortis Hospital","Kokilaben Hospital",
@@ -88,7 +88,7 @@ if st.session_state.role is None:
 
     # ---------------- ADMIN ----------------
     elif role == "Admin":
-        st.title("🛡 Admin Login")
+        st.title(" Admin Login")
 
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")

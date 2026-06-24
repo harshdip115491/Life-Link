@@ -1,6 +1,5 @@
 import streamlit as st
 from db import DB
-from sound_utils import play_sound
 import datetime
 import pandas as pd
 
@@ -123,7 +122,6 @@ def approve_request(row, source_type):
 
     db.conn.commit()
 
-    play_sound("assets/success.mp3")
     st.success("Approved & Sent")
 
 
@@ -136,7 +134,6 @@ def reject_request(req_id):
 
     db.conn.commit()
 
-    play_sound("assets/error.mp3")
     st.error("Rejected")
 
 
