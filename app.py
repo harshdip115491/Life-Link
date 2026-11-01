@@ -94,7 +94,7 @@ if st.session_state.role is None:
         password = st.text_input("Password", type="password")
 
         if st.button("Login"):
-            if username == "admin" and password == "admin123":
+            if username == "lahu" and password == "lahu":
                 st.session_state.role = "admin"
                 st.session_state.user = "admin"   # FIX: ensure session exists
                 st.success("Admin Login Successful")
